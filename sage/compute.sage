@@ -6,7 +6,7 @@ Run from the repository root with
     sage sage/compute.sage
 
 The script constructs G_{5,4}, verifies the cubical infrastructure,
-and runs the complete support-filtration computation. No prerecorded
+and runs the complete support-rank filtration computation. No prerecorded
 rank table or stream length is used as a stopping criterion.
 """
 
@@ -33,7 +33,7 @@ print("Graph:", graph.summary(), flush=True)
 
 
 # ----------------------------------------------------------------------
-# 1. Cubical model and structural checks
+# 1. Cubical model and structural checks (Appendix A.1)
 # ----------------------------------------------------------------------
 
 print("\n=== Cubical model ===", flush=True)
@@ -49,7 +49,7 @@ print("Verified normalized based squares:", checked_squares, flush=True)
 
 
 # ----------------------------------------------------------------------
-# 2. Local exact-support blocks of ranks one and two
+# 2. Local exact-support blocks of ranks one and two (Appendix A.2)
 # ----------------------------------------------------------------------
 
 print("\n=== Rank-one local blocks ===", flush=True)
@@ -80,7 +80,7 @@ assert all(result.h2_dimension == len(result.representatives)
 
 
 # ----------------------------------------------------------------------
-# 3. F_1 and the connecting map delta_2
+# 3. F_1 and the connecting homomorphism delta_2 (Appendix A.2--A.3)
 # ----------------------------------------------------------------------
 
 print("\n=== F1 and delta2 ===", flush=True)
@@ -96,7 +96,7 @@ assert delta2.h2_f2 == len(delta2.kernel)
 # print("Computed dim H2(F2) =", delta2.h2_f2, flush=True)
 
 # ----------------------------------------------------------------------
-# 4. Rank-three relative blocks
+# 4. Rank-three relative blocks (Appendix A.2)
 # ----------------------------------------------------------------------
 
 print("\n=== Rank-three relative blocks ===", flush=True)
@@ -112,7 +112,7 @@ assert all(result.rank == len(result.block.c2) for result in rank3.values())
 
 
 # ----------------------------------------------------------------------
-# 5. The connecting map delta_3
+# 5. The connecting homomorphism delta_3 (Appendix A.3)
 # ----------------------------------------------------------------------
 
 print("\n=== Residual coordinates and delta3 ===", flush=True)
@@ -140,7 +140,7 @@ assert h2_f3 == 0
 
 
 # ----------------------------------------------------------------------
-# 6. Rank-four relative blocks
+# 6. Rank-four relative blocks (Appendix A.2)
 # ----------------------------------------------------------------------
 
 print("\n=== Rank-four relative blocks ===", flush=True)
@@ -163,7 +163,7 @@ assert all(
 # 7. Passage from F_4 to the full cubical chain complex
 # ----------------------------------------------------------------------
 
-# Every normalized 2-cube lies in F_4. Since H_2(F_4)=0, the full normalized cubical complex also has H_2=0.
+# Every non-degenerate 2-cube lies in F_4. Since H_2(F_4)=0, the full normalized cubical complex also has H_2=0.
 max_support_rank_c2 = max(inventory["support_distribution"])
 assert max_support_rank_c2 <= 4
 

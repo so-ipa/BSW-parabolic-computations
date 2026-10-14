@@ -2,7 +2,7 @@
 Cubical-chain infrastructure for DH_2(G_{5,4}; F_2).
 
 This module implements graph cubes, normalization by projections and
-min/max connections, Coxeter support, and enumeration of based cubes.
+min/max connections, exact parabolic support, and enumeration of based cubes.
 Optimized routines are checked against direct reference implementations.
 """
 
@@ -50,7 +50,7 @@ def earlier_neighbors(position, q):
 
 class CubicalModel:
     """
-    Graph-cube operations and the inventory of normalized based squares.
+    Graph-cube operations and the inventory of based non-degenerate 2-cubes.
 
     Projection- and connection-degenerate cubes vanish; no quotient is
     taken by cube symmetries or left translations.
@@ -149,7 +149,7 @@ class CubicalModel:
         return self.translate(self.graph.inv[cube[0]], cube)
 
     def based_support(self, cube):
-        """Return the Coxeter support of a based cube."""
+        """Return the exact standard parabolic support of a based cube."""
         assert cube[0] == self.graph.e
         mask = 0
         for v in cube[1:]:
@@ -157,7 +157,7 @@ class CubicalModel:
         return frozenset(i for i in range(self.graph.rank) if mask & (1 << i))
 
     def support(self, cube):
-        """Return the Coxeter support after rebasing cube."""
+        """Return the exact support of the based translate of a cube."""
         return self.based_support(self.rebase(cube))
 
     def face_descriptor(self, face):
